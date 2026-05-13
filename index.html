@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en" data-theme="humdrum">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Humdrum Style Guide</title>
+  <link rel="stylesheet" href="./tokens.css" />
+  <link rel="stylesheet" href="./style-guide.css" />
+  <!--
+    Override @font-face URLs with relative paths so this file works via file://.
+    tokens.css uses /fonts/ (root-relative) for Next.js apps; we re-declare
+    the same families with ./fonts/ here. Browser uses last @font-face wins.
+    Symlink _shared-app-kit/fonts → scaffold/public/fonts keeps both paths real.
+  -->
+  <style>
+    /* Awke */
+    @font-face { font-family: "Awke"; src: url("./fonts/Awke-Thin.woff2") format("woff2"); font-weight: 100; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Awke"; src: url("./fonts/Awke-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Awke"; src: url("./fonts/Awke-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+
+    /* Untitled Sans */
+    @font-face { font-family: "Untitled Sans"; src: url("./fonts/untitled-sans-light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Untitled Sans"; src: url("./fonts/untitled-sans-light-italic.woff2") format("woff2"); font-weight: 300; font-style: italic; font-display: swap; }
+    @font-face { font-family: "Untitled Sans"; src: url("./fonts/untitled-sans-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Untitled Sans"; src: url("./fonts/untitled-sans-regular-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+    @font-face { font-family: "Untitled Sans"; src: url("./fonts/untitled-sans-medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Untitled Sans"; src: url("./fonts/untitled-sans-medium-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
+    @font-face { font-family: "Untitled Sans"; src: url("./fonts/untitled-sans-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Untitled Sans"; src: url("./fonts/untitled-sans-bold-italic.woff2") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
+    @font-face { font-family: "Untitled Sans"; src: url("./fonts/untitled-sans-black.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Untitled Sans"; src: url("./fonts/untitled-sans-black-italic.woff2") format("woff2"); font-weight: 900; font-style: italic; font-display: swap; }
+
+    /* Name Mono — variable font preferred, static fallback */
+    @font-face {
+      font-family: "Name Mono";
+      src: url("./fonts/ATNameMonoVariable-Regular.woff2") format("woff2-variations"),
+           url("./fonts/ATNameMono-Regular.woff2") format("woff2");
+      font-weight: 100 900; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: "Name Mono";
+      src: url("./fonts/ATNameMonoVariable-RegularItalic.woff2") format("woff2-variations"),
+           url("./fonts/ATNameMono-Italic.woff2") format("woff2");
+      font-weight: 100 900; font-style: italic; font-display: swap;
+    }
+  </style>
+</head>
+<body>
+  <div class="sg-wrap">
+    <header class="sg-header">
+      <div>
+        <h1 class="sg-title">Humdrum Style Guide</h1>
+        <p class="sg-sub">Style guides for Humdrum.one</p>
+      </div>
+      <div class="sg-theme-picker" role="group" aria-label="Theme">
+        <button class="sg-theme-btn" data-set-theme="humdrum" aria-pressed="true">Humdrum</button>
+        <button class="sg-theme-btn" data-set-theme="humdrum-dark" aria-pressed="false">Humdrum Dark</button>
+        <button class="sg-theme-btn" data-set-theme="flexoki" aria-pressed="false">Flexoki</button>
+        <button class="sg-theme-btn" data-set-theme="flexoki-dark" aria-pressed="false">Flexoki Dark</button>
+        <button class="sg-theme-btn" data-set-theme="uchu" aria-pressed="false">Uchu</button>
+        <button class="sg-theme-btn" data-set-theme="uchu-dark" aria-pressed="false">Uchu Dark</button>
+        <button class="sg-theme-btn" data-set-theme="eink" aria-pressed="false">E-ink</button>
+      </div>
+    </header>
+
+    <div id="theme-credit" class="sg-credit"></div>
+
+    <section aria-labelledby="s-surface">
+      <h2 id="s-surface">Surfaces &amp; layout</h2>
+
+      <div class="sg-stack">
+        <span class="sg-stack-label">background <code>--bg</code></span>
+        <div class="sg-stack sg-stack--surface">
+          <span class="sg-stack-label">surface <code>--bg-card</code></span>
+          <div class="sg-stack sg-stack--raised">
+            <span class="sg-stack-label">surface-raised <code>--bg-elevated</code></span>
+            <p class="sg-stack-desc">Elevated content, dropdowns, modals</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sg-border-grid">
+        <div class="sg-border-card">
+          <span class="sg-stack-label">border <code>--border</code></span>
+          <p class="sg-stack-desc">Default borders, dividers, card edges</p>
+        </div>
+        <div class="sg-border-card sg-border-card--strong">
+          <span class="sg-stack-label">border-strong <code>--border-strong</code></span>
+          <p class="sg-stack-desc">Emphasis, active states, focus rings</p>
+        </div>
+      </div>
+
+      <div class="sg-accent-panel">
+        <p class="sg-accent-panel-title">accent-subtle background with accent border</p>
+        <p class="sg-stack-desc">Used for highlighted panels, info banners, active list items</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="s-tokens">
+      <h2 id="s-tokens">Surface tokens</h2>
+      <div class="sg-swatches" id="swatches-surface"></div>
+
+      <h2 style="margin-top: var(--space-8);">Color levels</h2>
+      <p class="sg-meta" style="margin-bottom: var(--space-4);">
+        200 lightest → 600 strongest. <code>--{name}</code> aliases <code>--{name}-400</code>.
+      </p>
+      <div id="swatches-levels"></div>
+    </section>
+
+    <section aria-labelledby="s-type">
+      <h2 id="s-type">Typography</h2>
+      <div class="sg-meta">
+        <span>display: <strong>Awke</strong></span>
+        <span>body: <strong>Untitled Sans</strong></span>
+        <span>mono: <strong>Name Mono</strong></span>
+      </div>
+      <h3 style="font-family: var(--font-display); font-size: var(--text-xl); margin: var(--space-6) 0 var(--space-3);">Awke — display</h3>
+      <div class="sg-type-row"><div class="sg-type-label">thin / 100</div>
+        <div style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 100;">The quick brown fox</div></div>
+      <div class="sg-type-row"><div class="sg-type-label">regular / 400</div>
+        <div style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 400;">The quick brown fox</div></div>
+      <div class="sg-type-row"><div class="sg-type-label">bold / 700</div>
+        <div style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 700;">The quick brown fox</div></div>
+
+      <h3 style="font-family: var(--font-display); font-size: var(--text-xl); margin: var(--space-6) 0 var(--space-3);">Untitled Sans — body</h3>
+      <div class="sg-type-row"><div class="sg-type-label">light / 300</div>
+        <div style="font-weight: 300;">Jackdaws love my big sphinx of quartz <em>italic too</em></div></div>
+      <div class="sg-type-row"><div class="sg-type-label">regular / 400</div>
+        <div style="font-weight: 400;">Jackdaws love my big sphinx of quartz <em>italic too</em></div></div>
+      <div class="sg-type-row"><div class="sg-type-label">medium / 500</div>
+        <div style="font-weight: 500;">Jackdaws love my big sphinx of quartz <em>italic too</em></div></div>
+      <div class="sg-type-row"><div class="sg-type-label">bold / 700</div>
+        <div style="font-weight: 700;">Jackdaws love my big sphinx of quartz <em>italic too</em></div></div>
+      <div class="sg-type-row"><div class="sg-type-label">black / 900</div>
+        <div style="font-weight: 900;">Jackdaws love my big sphinx of quartz <em>italic too</em></div></div>
+
+      <h3 style="font-family: var(--font-display); font-size: var(--text-xl); margin: var(--space-6) 0 var(--space-3);">Type scale</h3>
+      <div class="sg-type-row"><div class="sg-type-label">5xl</div>
+        <div style="font-family: var(--font-display); font-size: var(--text-5xl);">The quick brown fox</div></div>
+      <div class="sg-type-row"><div class="sg-type-label">4xl</div>
+        <div style="font-family: var(--font-display); font-size: var(--text-4xl);">The quick brown fox</div></div>
+      <div class="sg-type-row"><div class="sg-type-label">3xl</div>
+        <div style="font-family: var(--font-display); font-size: var(--text-3xl);">The quick brown fox</div></div>
+      <div class="sg-type-row"><div class="sg-type-label">2xl</div>
+        <div style="font-size: var(--text-2xl);">Jackdaws love my big sphinx of quartz</div></div>
+      <div class="sg-type-row"><div class="sg-type-label">xl</div>
+        <div style="font-size: var(--text-xl);">Jackdaws love my big sphinx of quartz</div></div>
+      <div class="sg-type-row"><div class="sg-type-label">lg</div>
+        <div style="font-size: var(--text-lg);">Jackdaws love my big sphinx of quartz</div></div>
+      <div class="sg-type-row"><div class="sg-type-label">base</div>
+        <div>Jackdaws love my big sphinx of quartz. The five boxing wizards jump quickly.</div></div>
+      <div class="sg-type-row"><div class="sg-type-label">sm</div>
+        <div style="font-size: var(--text-sm);">Jackdaws love my big sphinx of quartz</div></div>
+      <div class="sg-type-row"><div class="sg-type-label">xs / muted</div>
+        <div style="font-size: var(--text-xs); color: var(--text-muted);">Jackdaws love my big sphinx of quartz</div></div>
+
+      <h3 style="font-family: var(--font-display); font-size: var(--text-xl); margin: var(--space-6) 0 var(--space-3);">Name Mono</h3>
+      <div class="sg-type-row"><div class="sg-type-label">code</div>
+        <div style="font-family: var(--font-mono);">const x: Item = { id: 'abc', done: false };</div></div>
+      <div class="sg-type-row"><div class="sg-type-label">italic</div>
+        <div style="font-family: var(--font-mono); font-style: italic;">// shared contract for /api/items + Go CLI</div></div>
+    </section>
+
+    <section aria-labelledby="s-comp">
+      <h2 id="s-comp">Interactive elements</h2>
+
+      <h3 class="sg-eyebrow">Buttons</h3>
+      <div class="sg-row" style="margin-bottom: var(--space-6);">
+        <button class="sg-btn sg-btn-primary">Primary</button>
+        <button class="sg-btn">Secondary</button>
+        <button class="sg-btn sg-btn-ghost">Ghost</button>
+        <button class="sg-btn sg-btn-accent-outline">Accent outline</button>
+        <button class="sg-btn sg-btn-disabled" disabled>Disabled</button>
+      </div>
+
+      <h3 class="sg-eyebrow">Inputs</h3>
+      <div class="sg-input-stack" style="margin-bottom: var(--space-6);">
+        <input class="sg-input" placeholder="Default input" />
+        <input class="sg-input sg-input-focused" placeholder="Focused state" />
+        <input class="sg-input sg-input-disabled" placeholder="Disabled" disabled />
+      </div>
+
+      <h3 class="sg-eyebrow">Badges &amp; tags</h3>
+      <div class="sg-row" style="margin-bottom: var(--space-6);">
+        <span class="sg-badge">Default</span>
+        <span class="sg-badge sg-badge-accent">Accent</span>
+        <span class="sg-badge sg-badge-label">LABEL</span>
+        <span class="sg-badge sg-badge-error">Error</span>
+        <span class="sg-badge sg-badge-success">Success</span>
+      </div>
+
+      <h3 class="sg-eyebrow">Card</h3>
+      <div class="sg-card" style="margin-bottom: var(--space-6);">
+        <strong>Card title</strong>
+        <p style="margin: var(--space-2) 0 0; color: var(--text-muted);">
+          Cards sit on <code>--bg-card</code>. Borders use <code>--border</code>.
+        </p>
+      </div>
+
+      <h3 class="sg-eyebrow">Nav</h3>
+      <nav class="sg-nav" aria-label="Example">
+        <a href="#" aria-current="page">Home</a>
+        <a href="#">List</a>
+        <a href="#">Settings</a>
+      </nav>
+    </section>
+
+    <section aria-labelledby="s-spacing">
+      <h2 id="s-spacing">Spacing &amp; radius</h2>
+      <div class="sg-row" id="space-row"></div>
+      <div class="sg-row" id="radius-row" style="margin-top: var(--space-6);"></div>
+    </section>
+
+    <section aria-labelledby="s-code">
+      <h2 id="s-code">Snippet</h2>
+<pre class="sg-code">/* Use tokens, never literals */
+.card {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+}</pre>
+    </section>
+
+    <footer style="margin-top: var(--space-12); color: var(--text-muted); font-size: var(--text-sm);">
+      <p>Source: <code>_shared-app-kit/STYLE_GUIDE.html</code> · Tokens: <code>tokens.css</code></p>
+    </footer>
+  </div>
+
+  <script>
+    const KEY = 'sg-theme';
+    const html = document.documentElement;
+    const btns = document.querySelectorAll('[data-set-theme]');
+
+    const SURFACE_TOKENS = [
+      '--bg','--bg-card','--bg-elevated','--bg-hover','--bg-active',
+      '--border','--border-strong',
+      '--text','--text-muted','--text-faint','--text-accent','--text-on-accent',
+      '--accent','--selection',
+    ];
+    const COLOR_FAMILIES = ['red','orange','yellow','green','cyan','blue','purple','pink'];
+    const LEVELS = [200, 300, 400, 500, 600];
+
+    function swatchHTML(token, value) {
+      return `<div class="sg-swatch">
+        <div class="sg-swatch-color" style="background:${value}"></div>
+        <div class="sg-swatch-label">${token}<br><span class="sg-swatch-hex">${value}</span></div>
+      </div>`;
+    }
+
+    // Hardcoded contrast — independent of theme's --text token, which would
+    // give light text on light bg in dark themes for the lighter level cells.
+    const DARK_TEXT  = '#100F0F';
+    const LIGHT_TEXT = '#FFFCF0';
+    function levelTextColor(level) {
+      return level >= 500 ? LIGHT_TEXT : DARK_TEXT;
+    }
+
+    function renderSwatches() {
+      const cs = getComputedStyle(html);
+
+      const surfaceEl = document.getElementById('swatches-surface');
+      if (surfaceEl) {
+        surfaceEl.innerHTML = SURFACE_TOKENS
+          .map(t => swatchHTML(t, cs.getPropertyValue(t).trim()))
+          .join('');
+      }
+
+      const levelsEl = document.getElementById('swatches-levels');
+      if (levelsEl) {
+        levelsEl.innerHTML = COLOR_FAMILIES.map(family => {
+          const cells = LEVELS.map(level => {
+            const token = `--${family}-${level}`;
+            const value = cs.getPropertyValue(token).trim();
+            return `<div class="sg-level-cell" style="background:${value}; color:${levelTextColor(level)}">
+              <span class="sg-level-num">${level}</span>
+              <span class="sg-level-hex">${value || '—'}</span>
+            </div>`;
+          }).join('');
+          return `<div class="sg-level-row">
+            <div class="sg-level-name">${family}</div>
+            <div class="sg-level-cells">${cells}</div>
+          </div>`;
+        }).join('');
+      }
+    }
+
+    const CREDITS = {
+      humdrum: {
+        name: 'Humdrum',
+        blurb: 'Custom palette. Blue base #0F80EA. OKLCH-stepped levels.',
+        links: [],
+      },
+      flexoki: {
+        name: 'Flexoki',
+        blurb: 'By Steph Ango.',
+        links: [
+          { href: 'https://stephango.com/flexoki', text: 'stephango.com/flexoki' },
+          { href: 'https://github.com/kepano/flexoki', text: 'github.com/kepano/flexoki' },
+        ],
+      },
+      uchu: {
+        name: 'Uchu',
+        blurb: 'OKLCH-defined high-chroma palette.',
+        links: [
+          { href: 'https://uchu.style', text: 'uchu.style' },
+          { href: 'https://github.com/Passw/NeverCease-uchu', text: 'github.com/Passw/NeverCease-uchu' },
+        ],
+      },
+      eink: {
+        name: 'E-ink',
+        blurb: 'Pure monochrome. Targeted at Boox Palma Pro 2.',
+        links: [],
+      },
+    };
+
+    function renderCredit(theme) {
+      const family = theme.replace('-dark', '');
+      const c = CREDITS[family];
+      const el = document.getElementById('theme-credit');
+      if (!el || !c) return;
+      const linksHTML = c.links.length
+        ? c.links.map(l => `<a href="${l.href}" target="_blank" rel="noopener">${l.text} ↗</a>`).join(' · ')
+        : '';
+      el.innerHTML = `
+        <span class="sg-credit-name">${c.name}</span>
+        <span class="sg-credit-blurb">${c.blurb}</span>
+        ${linksHTML ? `<span class="sg-credit-links">${linksHTML}</span>` : ''}
+      `;
+    }
+
+    function setTheme(t) {
+      html.setAttribute('data-theme', t);
+      localStorage.setItem(KEY, t);
+      btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.setTheme === t ? 'true' : 'false'));
+      renderSwatches();
+      renderCredit(t);
+    }
+
+    btns.forEach(b => b.addEventListener('click', () => setTheme(b.dataset.setTheme)));
+
+    // Spacing + radius (static — independent of theme)
+    const spaces = [1,2,3,4,5,6,8,10,12,16];
+    document.getElementById('space-row').innerHTML = spaces.map(n =>
+      `<div style="text-align:center;font-family:var(--font-mono);font-size:var(--text-xs);">
+        <div style="width:var(--space-${n});height:var(--space-${n});background:var(--accent);border-radius:var(--radius-sm);margin:0 auto var(--space-1);"></div>
+        --space-${n}
+      </div>`
+    ).join('');
+
+    const radii = ['sm','','lg','xl'];
+    document.getElementById('radius-row').innerHTML = radii.map(r => {
+      const v = r ? `--radius-${r}` : '--radius';
+      return `<div style="text-align:center;font-family:var(--font-mono);font-size:var(--text-xs);">
+        <div style="width:64px;height:64px;background:var(--accent);border-radius:var(${v});margin:0 auto var(--space-1);"></div>
+        ${v}
+      </div>`;
+    }).join('');
+
+    // Apply saved theme last — by now all helpers + targets exist.
+    const saved = localStorage.getItem(KEY);
+    setTheme(saved || 'humdrum');
+  </script>
+</body>
+</html>

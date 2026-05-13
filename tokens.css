@@ -1,0 +1,638 @@
+/*
+ * tokens.css — single source-of-truth for theme + type tokens.
+ * Imported by scaffold/app/globals.css and STYLE_GUIDE.html.
+ *
+ * Themes (7 modes via data-theme):
+ *   flexoki | flexoki-dark | uchu | uchu-dark | humdrum | humdrum-dark | eink
+ *
+ * Color levels (per family — red, orange, yellow, green, cyan, blue, purple, pink):
+ *   --{color}-200 — lightest accent, hairline borders, soft fills
+ *   --{color}-300 — soft accent, hover backgrounds
+ *   --{color}-400 — DEFAULT (also exposed as --{color} alias)
+ *   --{color}-500 — pressed/active
+ *   --{color}-600 — strong text on light, prominent fills
+ *
+ * Sources:
+ *   Flexoki — github.com/kepano/flexoki (kepano)
+ *   Uchu    — github.com/Passw/NeverCease-uchu, uchu.style
+ *   Humdrum — custom; blue base #0f80ea per spec, OKLCH-derived levels
+ */
+
+/* ─── Font face declarations ───────────────────────────────────────── */
+
+/* Awke — display. Three weights. */
+@font-face {
+  font-family: "Awke";
+  src: url("/fonts/Awke-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Awke";
+  src: url("/fonts/Awke-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Awke";
+  src: url("/fonts/Awke-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Untitled Sans — body. Light/Regular/Medium/Bold/Black + italics. */
+@font-face {
+  font-family: "Untitled Sans";
+  src: url("/fonts/untitled-sans-light.woff2") format("woff2");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Untitled Sans";
+  src: url("/fonts/untitled-sans-light-italic.woff2") format("woff2");
+  font-weight: 300; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Untitled Sans";
+  src: url("/fonts/untitled-sans-regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Untitled Sans";
+  src: url("/fonts/untitled-sans-regular-italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Untitled Sans";
+  src: url("/fonts/untitled-sans-medium.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Untitled Sans";
+  src: url("/fonts/untitled-sans-medium-italic.woff2") format("woff2");
+  font-weight: 500; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Untitled Sans";
+  src: url("/fonts/untitled-sans-bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Untitled Sans";
+  src: url("/fonts/untitled-sans-bold-italic.woff2") format("woff2");
+  font-weight: 700; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Untitled Sans";
+  src: url("/fonts/untitled-sans-black.woff2") format("woff2");
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Untitled Sans";
+  src: url("/fonts/untitled-sans-black-italic.woff2") format("woff2");
+  font-weight: 900; font-style: italic; font-display: swap;
+}
+
+/* Name Mono — variable font preferred, static fallbacks. */
+@font-face {
+  font-family: "Name Mono";
+  src: url("/fonts/ATNameMonoVariable-Regular.woff2") format("woff2-variations"),
+       url("/fonts/ATNameMono-Regular.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Name Mono";
+  src: url("/fonts/ATNameMonoVariable-RegularItalic.woff2") format("woff2-variations"),
+       url("/fonts/ATNameMono-Italic.woff2") format("woff2");
+  font-weight: 100 900; font-style: italic; font-display: swap;
+}
+
+/* ─── Global tokens (shared across all themes) ─────────────────────── */
+
+:root {
+  --font-display: "Awke", "Untitled Sans", sans-serif;
+  --font-body:    "Untitled Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono:    "Name Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+  --leading-tight:  1.2;
+  --leading-normal: 1.5;
+  --leading-relax:  1.7;
+
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  --radius-sm: 4px;
+  --radius:    8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --tap-min: 44px;
+
+  /*
+   * Derived semantic tokens — resolve per-theme via the active --accent + --bg.
+   * color-mix evaluates at use-site, so the same :root declaration works for
+   * every theme without repetition.
+   */
+  --accent-subtle:        color-mix(in oklab, var(--accent) 12%, var(--bg));
+  --accent-subtle-border: var(--accent);
+  --focus-ring:           var(--accent);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FLEXOKI — kepano canonical (github.com/kepano/flexoki)
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root,
+[data-theme="flexoki"] {
+  /* Surfaces */
+  --bg:            #FFFCF0;  /* paper */
+  --bg-card:       #F2F0E5;  /* 50 */
+  --bg-elevated:   #F2F0E5;
+  --bg-hover:      rgba(0, 0, 0, 0.04);
+  --bg-active:     rgba(0, 0, 0, 0.08);
+  --border:        #E6E4D9;  /* 100 */
+  --border-strong: #CECDC3;  /* 200 */
+  --text:          #100F0F;  /* black */
+  --text-muted:    #6F6E69;  /* 600 */
+  --text-faint:    #B7B5AC;  /* 300 */
+  --text-accent:   #100F0F;
+  --text-on-accent:#FFFCF0;
+  --selection:     #DDF1E4;  /* cyan-50 */
+  --accent:        #24837B;  /* cyan-600 */
+
+  /* Red */
+  --red-200: #F89A8A; --red-300: #E8705F; --red-400: #D14D41; --red-500: #C03E35; --red-600: #AF3029;
+  --red: var(--red-400);
+  /* Orange */
+  --orange-200: #F9AE77; --orange-300: #EC8B49; --orange-400: #DA702C; --orange-500: #CB6120; --orange-600: #BC5215;
+  --orange: var(--orange-400);
+  /* Yellow */
+  --yellow-200: #ECCB60; --yellow-300: #DFB431; --yellow-400: #D0A215; --yellow-500: #BE9207; --yellow-600: #AD8301;
+  --yellow: var(--yellow-400);
+  /* Green */
+  --green-200: #BEC97E; --green-300: #A0AF54; --green-400: #879A39; --green-500: #768D21; --green-600: #66800B;
+  --green: var(--green-400);
+  /* Cyan */
+  --cyan-200: #87D3C3; --cyan-300: #5ABDAC; --cyan-400: #3AA99F; --cyan-500: #2F968D; --cyan-600: #24837B;
+  --cyan: var(--cyan-400);
+  /* Blue */
+  --blue-200: #92BFDB; --blue-300: #66A0C8; --blue-400: #4385BE; --blue-500: #3171B2; --blue-600: #205EA6;
+  --blue: var(--blue-400);
+  /* Purple */
+  --purple-200: #C4B9E0; --purple-300: #A699D0; --purple-400: #8B7EC8; --purple-500: #735EB5; --purple-600: #5E409D;
+  --purple: var(--purple-400);
+  /* Pink (Flexoki magenta) */
+  --pink-200: #F4A4C2; --pink-300: #E47DA8; --pink-400: #CE5D97; --pink-500: #B74583; --pink-600: #A02F6F;
+  --pink: var(--pink-400);
+}
+
+[data-theme="flexoki-dark"] {
+  --bg:            #100F0F;  /* black */
+  --bg-card:       #1C1B1A;  /* 950 */
+  --bg-elevated:   #282726;  /* 900 */
+  --bg-hover:      rgba(255, 255, 255, 0.05);
+  --bg-active:     rgba(255, 255, 255, 0.1);
+  --border:        #282726;  /* 900 */
+  --border-strong: #403E3C;  /* 800 */
+  --text:          #CECDC3;  /* 200 */
+  --text-muted:    #878580;  /* 500 */
+  --text-faint:    #575653;  /* 700 */
+  --text-accent:   #CECDC3;
+  --text-on-accent:#100F0F;
+  --selection:     #122F2C;  /* cyan-900 */
+  --accent:        #3AA99F;  /* cyan-400 */
+
+  --red-200: #F89A8A; --red-300: #E8705F; --red-400: #D14D41; --red-500: #C03E35; --red-600: #AF3029;
+  --red: var(--red-400);
+  --orange-200: #F9AE77; --orange-300: #EC8B49; --orange-400: #DA702C; --orange-500: #CB6120; --orange-600: #BC5215;
+  --orange: var(--orange-400);
+  --yellow-200: #ECCB60; --yellow-300: #DFB431; --yellow-400: #D0A215; --yellow-500: #BE9207; --yellow-600: #AD8301;
+  --yellow: var(--yellow-400);
+  --green-200: #BEC97E; --green-300: #A0AF54; --green-400: #879A39; --green-500: #768D21; --green-600: #66800B;
+  --green: var(--green-400);
+  --cyan-200: #87D3C3; --cyan-300: #5ABDAC; --cyan-400: #3AA99F; --cyan-500: #2F968D; --cyan-600: #24837B;
+  --cyan: var(--cyan-400);
+  --blue-200: #92BFDB; --blue-300: #66A0C8; --blue-400: #4385BE; --blue-500: #3171B2; --blue-600: #205EA6;
+  --blue: var(--blue-400);
+  --purple-200: #C4B9E0; --purple-300: #A699D0; --purple-400: #8B7EC8; --purple-500: #735EB5; --purple-600: #5E409D;
+  --purple: var(--purple-400);
+  --pink-200: #F4A4C2; --pink-300: #E47DA8; --pink-400: #CE5D97; --pink-500: #B74583; --pink-600: #A02F6F;
+  --pink: var(--pink-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   UCHU — canonical OKLCH (github.com/Passw/NeverCease-uchu, uchu.style)
+   Levels 2-6 of canonical 1-9 scale → mapped to 200-600.
+   ═══════════════════════════════════════════════════════════════════ */
+
+[data-theme="uchu"] {
+  --bg:            oklch(99.4% 0 0);                /* yang */
+  --bg-card:       oklch(95.57% 0.003 286.35);      /* gray-1 */
+  --bg-elevated:   oklch(99.4% 0 0);
+  --bg-hover:      rgba(0, 0, 0, 0.035);
+  --bg-active:     rgba(0, 0, 0, 0.07);
+  --border:        oklch(91.87% 0.003 264.54);      /* yin-1 */
+  --border-strong: oklch(84.61% 0.004 286.31);      /* yin-2 */
+  --text:          oklch(14.38% 0.007 256.88);      /* yin */
+  --text-muted:    oklch(43.87% 0.005 271.3);       /* yin-7 */
+  --text-faint:    oklch(69.17% 0.004 247.88);      /* yin-4 */
+  --text-accent:   oklch(14.38% 0.007 256.88);
+  --text-on-accent:oklch(99.4% 0 0);
+  --selection:     oklch(89.1% 0.046 305.24);       /* purple-1 */
+  --accent:        oklch(58.47% 0.181 302.06);      /* purple-4 */
+
+  --red-200:    oklch(78.78% 0.109 4.54);
+  --red-300:    oklch(69.86% 0.162 7.82);
+  --red-400:    oklch(62.73% 0.209 12.37);
+  --red-500:    oklch(58.63% 0.231 19.6);
+  --red-600:    oklch(54.41% 0.214 19.06);
+  --red: var(--red-400);
+
+  --orange-200: oklch(88.37% 0.0726 55.8);
+  --orange-300: oklch(83.56% 0.1075 56.49);
+  --orange-400: oklch(78.75% 0.1416 54.33);
+  --orange-500: oklch(74.61% 0.171 51.56);
+  --orange-600: oklch(69.33% 0.157 52.18);
+  --orange: var(--orange-400);
+
+  --yellow-200: oklch(95% 0.07 92.39);
+  --yellow-300: oklch(92.76% 0.098 92.58);
+  --yellow-400: oklch(90.92% 0.125 92.56);
+  --yellow-500: oklch(89% 0.146 91.5);
+  --yellow-600: oklch(82.39% 0.133 91.5);
+  --yellow: var(--yellow-400);
+
+  --green-200:  oklch(88.77% 0.096 147.71);
+  --green-300:  oklch(83.74% 0.139 146.57);
+  --green-400:  oklch(79.33% 0.179 145.62);
+  --green-500:  oklch(75.23% 0.209 144.64);
+  --green-600:  oklch(70.03% 0.194 144.71);
+  --green: var(--green-400);
+
+  /* Uchu has no canonical "cyan" — derive from blue+green hue middle. */
+  --cyan-200:   oklch(85% 0.07 200);
+  --cyan-300:   oklch(78% 0.10 200);
+  --cyan-400:   oklch(70% 0.13 200);
+  --cyan-500:   oklch(63% 0.14 200);
+  --cyan-600:   oklch(55% 0.13 200);
+  --cyan: var(--cyan-400);
+
+  --blue-200:   oklch(80.17% 0.091 258.88);
+  --blue-300:   oklch(70.94% 0.136 258.06);
+  --blue-400:   oklch(62.39% 0.181 258.33);
+  --blue-500:   oklch(54.87% 0.222 260.33);
+  --blue-600:   oklch(51.15% 0.204 260.17);
+  --blue: var(--blue-400);
+
+  --purple-200: oklch(78.68% 0.091 305);
+  --purple-300: oklch(68.5% 0.136 303.78);
+  --purple-400: oklch(58.47% 0.181 302.06);
+  --purple-500: oklch(49.39% 0.215 298.31);
+  --purple-600: oklch(46.11% 0.198 298.4);
+  --purple: var(--purple-400);
+
+  --pink-200:   oklch(92.14% 0.046 352.31);
+  --pink-300:   oklch(88.9% 0.066 354.39);
+  --pink-400:   oklch(85.43% 0.09 354.1);
+  --pink-500:   oklch(82.23% 0.112 355.33);
+  --pink-600:   oklch(76.37% 0.101 355.37);
+  --pink: var(--pink-400);
+}
+
+[data-theme="uchu-dark"] {
+  --bg:            oklch(14.38% 0.007 256.88);      /* yin */
+  --bg-card:       oklch(25.11% 0.006 258.36);      /* yin-9 */
+  --bg-elevated:   oklch(35.02% 0.005 236.66);      /* yin-8 */
+  --bg-hover:      rgba(255, 255, 255, 0.05);
+  --bg-active:     rgba(255, 255, 255, 0.1);
+  --border:        oklch(35.02% 0.005 236.66);      /* yin-8 */
+  --border-strong: oklch(43.87% 0.005 271.3);       /* yin-7 */
+  --text:          oklch(91.87% 0.003 264.54);      /* yin-1 */
+  --text-muted:    oklch(69.17% 0.004 247.88);      /* yin-4 */
+  --text-faint:    oklch(52.79% 0.005 271.32);      /* yin-6 */
+  --text-accent:   oklch(91.87% 0.003 264.54);
+  --text-on-accent:oklch(14.38% 0.007 256.88);
+  --selection:     oklch(36.01% 0.145 298.35);      /* purple-9 */
+  --accent:        oklch(68.5% 0.136 303.78);       /* purple-3 */
+
+  --red-200:    oklch(78.78% 0.109 4.54);
+  --red-300:    oklch(69.86% 0.162 7.82);
+  --red-400:    oklch(62.73% 0.209 12.37);
+  --red-500:    oklch(58.63% 0.231 19.6);
+  --red-600:    oklch(54.41% 0.214 19.06);
+  --red: var(--red-400);
+  --orange-200: oklch(88.37% 0.0726 55.8);
+  --orange-300: oklch(83.56% 0.1075 56.49);
+  --orange-400: oklch(78.75% 0.1416 54.33);
+  --orange-500: oklch(74.61% 0.171 51.56);
+  --orange-600: oklch(69.33% 0.157 52.18);
+  --orange: var(--orange-400);
+  --yellow-200: oklch(95% 0.07 92.39);
+  --yellow-300: oklch(92.76% 0.098 92.58);
+  --yellow-400: oklch(90.92% 0.125 92.56);
+  --yellow-500: oklch(89% 0.146 91.5);
+  --yellow-600: oklch(82.39% 0.133 91.5);
+  --yellow: var(--yellow-400);
+  --green-200:  oklch(88.77% 0.096 147.71);
+  --green-300:  oklch(83.74% 0.139 146.57);
+  --green-400:  oklch(79.33% 0.179 145.62);
+  --green-500:  oklch(75.23% 0.209 144.64);
+  --green-600:  oklch(70.03% 0.194 144.71);
+  --green: var(--green-400);
+  --cyan-200:   oklch(85% 0.07 200);
+  --cyan-300:   oklch(78% 0.10 200);
+  --cyan-400:   oklch(70% 0.13 200);
+  --cyan-500:   oklch(63% 0.14 200);
+  --cyan-600:   oklch(55% 0.13 200);
+  --cyan: var(--cyan-400);
+  --blue-200:   oklch(80.17% 0.091 258.88);
+  --blue-300:   oklch(70.94% 0.136 258.06);
+  --blue-400:   oklch(62.39% 0.181 258.33);
+  --blue-500:   oklch(54.87% 0.222 260.33);
+  --blue-600:   oklch(51.15% 0.204 260.17);
+  --blue: var(--blue-400);
+  --purple-200: oklch(78.68% 0.091 305);
+  --purple-300: oklch(68.5% 0.136 303.78);
+  --purple-400: oklch(58.47% 0.181 302.06);
+  --purple-500: oklch(49.39% 0.215 298.31);
+  --purple-600: oklch(46.11% 0.198 298.4);
+  --purple: var(--purple-400);
+  --pink-200:   oklch(92.14% 0.046 352.31);
+  --pink-300:   oklch(88.9% 0.066 354.39);
+  --pink-400:   oklch(85.43% 0.09 354.1);
+  --pink-500:   oklch(82.23% 0.112 355.33);
+  --pink-600:   oklch(76.37% 0.101 355.37);
+  --pink: var(--pink-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   HUMDRUM — warm neutrals, vivid blue accent (#0f80ea ≈ oklch 60% 0.21 246).
+   All accent families derived in OKLCH around 400 = base.
+   ═══════════════════════════════════════════════════════════════════ */
+
+[data-theme="humdrum"] {
+  --bg:            #F5F3EE;
+  --bg-card:       #FFFFFF;
+  --bg-elevated:   #FFFFFF;
+  --bg-hover:      rgba(0, 0, 0, 0.035);
+  --bg-active:     rgba(0, 0, 0, 0.07);
+  --border:        #E2DFD7;
+  --border-strong: #C3BFB3;
+  --text:          #2A2825;
+  --text-muted:    #6D6A63;
+  --text-faint:    #ADA99F;
+  --text-accent:   #2A2825;
+  --text-on-accent:#FFFFFF;
+  --selection:     oklch(0.85 0.07 253);            /* blue-200 tint */
+  --accent:        #0F80EA;                         /* blue-400, kept as hex */
+
+  /*
+   * Color levels — every family anchored at oklch(0.60 0.18 H).
+   * Blue 400 = oklch(0.60 0.18 253) ≈ #0F80EA (actual conversion).
+   * All other families share L=0.60 C=0.18 at 400, only hue changes.
+   *
+   * Step pattern (L, C multiplier):
+   *   200: L 0.82, C × 0.45  (= 0.081)
+   *   300: L 0.72, C × 0.75  (= 0.135)
+   *   400: L 0.60, C × 1.00  (= 0.180)  base
+   *   500: L 0.53, C × 0.95  (= 0.171)
+   *   600: L 0.45, C × 0.85  (= 0.153)
+   */
+
+  /* Blue (primary) — base = #0F80EA */
+  --blue-200:   oklch(0.82 0.081 253);
+  --blue-300:   oklch(0.72 0.135 253);
+  --blue-400:   oklch(0.60 0.180 253);
+  --blue-500:   oklch(0.53 0.171 253);
+  --blue-600:   oklch(0.45 0.153 253);
+  --blue: var(--blue-400);
+
+  --red-200:    oklch(0.82 0.081 22);
+  --red-300:    oklch(0.72 0.135 22);
+  --red-400:    oklch(0.60 0.180 22);
+  --red-500:    oklch(0.53 0.171 22);
+  --red-600:    oklch(0.45 0.153 22);
+  --red: var(--red-400);
+
+  --orange-200: oklch(0.82 0.081 50);
+  --orange-300: oklch(0.72 0.135 50);
+  --orange-400: oklch(0.60 0.180 50);
+  --orange-500: oklch(0.53 0.171 50);
+  --orange-600: oklch(0.45 0.153 50);
+  --orange: var(--orange-400);
+
+  --yellow-200: oklch(0.82 0.081 85);
+  --yellow-300: oklch(0.72 0.135 85);
+  --yellow-400: oklch(0.60 0.180 85);
+  --yellow-500: oklch(0.53 0.171 85);
+  --yellow-600: oklch(0.45 0.153 85);
+  --yellow: var(--yellow-400);
+
+  --green-200:  oklch(0.82 0.081 140);
+  --green-300:  oklch(0.72 0.135 140);
+  --green-400:  oklch(0.60 0.180 140);
+  --green-500:  oklch(0.53 0.171 140);
+  --green-600:  oklch(0.45 0.153 140);
+  --green: var(--green-400);
+
+  --cyan-200:   oklch(0.82 0.081 205);
+  --cyan-300:   oklch(0.72 0.135 205);
+  --cyan-400:   oklch(0.60 0.180 205);
+  --cyan-500:   oklch(0.53 0.171 205);
+  --cyan-600:   oklch(0.45 0.153 205);
+  --cyan: var(--cyan-400);
+
+  --purple-200: oklch(0.82 0.081 295);
+  --purple-300: oklch(0.72 0.135 295);
+  --purple-400: oklch(0.60 0.180 295);
+  --purple-500: oklch(0.53 0.171 295);
+  --purple-600: oklch(0.45 0.153 295);
+  --purple: var(--purple-400);
+
+  --pink-200:   oklch(0.82 0.081 350);
+  --pink-300:   oklch(0.72 0.135 350);
+  --pink-400:   oklch(0.60 0.180 350);
+  --pink-500:   oklch(0.53 0.171 350);
+  --pink-600:   oklch(0.45 0.153 350);
+  --pink: var(--pink-400);
+}
+
+[data-theme="humdrum-dark"] {
+  --bg:            #1F1D1A;
+  --bg-card:       #282622;
+  --bg-elevated:   #32302C;
+  --bg-hover:      rgba(255, 255, 255, 0.04);
+  --bg-active:     rgba(255, 255, 255, 0.08);
+  --border:        #32302C;
+  --border-strong: #4A4740;
+  --text:          #E8E5DD;
+  --text-muted:    #A8A49B;
+  --text-faint:    #6D6A63;
+  --text-accent:   #E8E5DD;
+  --text-on-accent:#FFFFFF;
+  --selection:     oklch(0.35 0.13 253);            /* dark blue tint */
+  --accent:        #0F80EA;                         /* same as light, kept hex */
+
+  --blue-200:   oklch(0.82 0.081 253);
+  --blue-300:   oklch(0.72 0.135 253);
+  --blue-400:   oklch(0.60 0.180 253);
+  --blue-500:   oklch(0.53 0.171 253);
+  --blue-600:   oklch(0.45 0.153 253);
+  --blue: var(--blue-400);
+
+  --red-200:    oklch(0.82 0.081 22);
+  --red-300:    oklch(0.72 0.135 22);
+  --red-400:    oklch(0.60 0.180 22);
+  --red-500:    oklch(0.53 0.171 22);
+  --red-600:    oklch(0.45 0.153 22);
+  --red: var(--red-400);
+
+  --orange-200: oklch(0.82 0.081 50);
+  --orange-300: oklch(0.72 0.135 50);
+  --orange-400: oklch(0.60 0.180 50);
+  --orange-500: oklch(0.53 0.171 50);
+  --orange-600: oklch(0.45 0.153 50);
+  --orange: var(--orange-400);
+
+  --yellow-200: oklch(0.82 0.081 85);
+  --yellow-300: oklch(0.72 0.135 85);
+  --yellow-400: oklch(0.60 0.180 85);
+  --yellow-500: oklch(0.53 0.171 85);
+  --yellow-600: oklch(0.45 0.153 85);
+  --yellow: var(--yellow-400);
+
+  --green-200:  oklch(0.82 0.081 140);
+  --green-300:  oklch(0.72 0.135 140);
+  --green-400:  oklch(0.60 0.180 140);
+  --green-500:  oklch(0.53 0.171 140);
+  --green-600:  oklch(0.45 0.153 140);
+  --green: var(--green-400);
+
+  --cyan-200:   oklch(0.82 0.081 205);
+  --cyan-300:   oklch(0.72 0.135 205);
+  --cyan-400:   oklch(0.60 0.180 205);
+  --cyan-500:   oklch(0.53 0.171 205);
+  --cyan-600:   oklch(0.45 0.153 205);
+  --cyan: var(--cyan-400);
+
+  --purple-200: oklch(0.82 0.081 295);
+  --purple-300: oklch(0.72 0.135 295);
+  --purple-400: oklch(0.60 0.180 295);
+  --purple-500: oklch(0.53 0.171 295);
+  --purple-600: oklch(0.45 0.153 295);
+  --purple: var(--purple-400);
+
+  --pink-200:   oklch(0.82 0.081 350);
+  --pink-300:   oklch(0.72 0.135 350);
+  --pink-400:   oklch(0.60 0.180 350);
+  --pink-500:   oklch(0.53 0.171 350);
+  --pink-600:   oklch(0.45 0.153 350);
+  --pink: var(--pink-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   E-INK — pure monochrome, no motion. All accents collapse to black.
+   ═══════════════════════════════════════════════════════════════════ */
+
+[data-theme="eink"] {
+  --bg:            #FFFFFF;
+  --bg-card:       #FFFFFF;
+  --bg-elevated:   #FFFFFF;
+  --bg-hover:      #000000;
+  --bg-active:     #000000;
+  --border:        #000000;
+  --border-strong: #000000;
+  --text:          #000000;
+  --text-muted:    #000000;
+  --text-faint:    #000000;
+  --text-accent:   #000000;
+  --text-on-accent:#FFFFFF;
+  --selection:     #000000;
+  --accent:        #000000;
+
+  --red-200: #000; --red-300: #000; --red-400: #000; --red-500: #000; --red-600: #000;
+  --red: #000;
+  --orange-200: #000; --orange-300: #000; --orange-400: #000; --orange-500: #000; --orange-600: #000;
+  --orange: #000;
+  --yellow-200: #000; --yellow-300: #000; --yellow-400: #000; --yellow-500: #000; --yellow-600: #000;
+  --yellow: #000;
+  --green-200: #000; --green-300: #000; --green-400: #000; --green-500: #000; --green-600: #000;
+  --green: #000;
+  --cyan-200: #000; --cyan-300: #000; --cyan-400: #000; --cyan-500: #000; --cyan-600: #000;
+  --cyan: #000;
+  --blue-200: #000; --blue-300: #000; --blue-400: #000; --blue-500: #000; --blue-600: #000;
+  --blue: #000;
+  --purple-200: #000; --purple-300: #000; --purple-400: #000; --purple-500: #000; --purple-600: #000;
+  --purple: #000;
+  --pink-200: #000; --pink-300: #000; --pink-400: #000; --pink-500: #000; --pink-600: #000;
+  --pink: #000;
+}
+
+[data-theme="eink"],
+[data-theme="eink"] * {
+  transition: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+  font-weight: 600;
+}
+
+[data-theme="eink"] strong,
+[data-theme="eink"] b,
+[data-theme="eink"] h1,
+[data-theme="eink"] h2,
+[data-theme="eink"] h3 {
+  font-weight: 800;
+}
+
+[data-theme="eink"] button,
+[data-theme="eink"] .card,
+[data-theme="eink"] .nav,
+[data-theme="eink"] .btn,
+[data-theme="eink"] .dialog {
+  border: 2px solid #000 !important;
+  border-radius: 0 !important;
+}
+
+[data-theme="eink"] .btn-primary {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+[data-theme="eink"] .highlight {
+  background: transparent !important;
+  border-bottom: 4px solid #000 !important;
+  border-radius: 0 !important;
+}
+
+/* ─── Base body wiring ─────────────────────────────────────────────── */
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+h1, h2, h3 { font-family: var(--font-display); line-height: var(--leading-tight); }
+code, pre, kbd, samp { font-family: var(--font-mono); }
+::selection { background: var(--selection); }
